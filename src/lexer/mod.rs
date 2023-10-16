@@ -22,7 +22,7 @@ fn make_vector_char(str: &str) -> Vec<char> {
     str.chars().collect()
 }
 
-/// TODO: separate_token function, this function partition tokens into
+/// separate_token function, this function partition tokens into SeparatedToken.
 fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
     let first: Token = tokens.pop().unwrap();
     let second: Token = tokens.pop().unwrap();
@@ -33,28 +33,16 @@ fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
     let seventh: Token = tokens.pop().unwrap();
     let eighth: Token = tokens.pop().unwrap();
 
-    //result.push(SeparatedToken {
-    //    first_token: first,
-    //    second_token: second,
-    //    third_token: third,
-    //    fourth_token: fourth,
-    //    fifth_token: fifth,
-    //    sixth_token: sixth,
-    //    seventh_token: seventh,
-    //    eighth_token: eighth,
-    //});
-
-    //result
-    SeparatedToken::new(
-        first,
-        second,
-        third,
-        fourth,
-        fifth,
-        sixth,
-        seventh,
-        eighth,
-    )
+    SeparatedToken {
+        first_token: first,
+        second_token: second,
+        third_token: third,
+        fourth_token: fourth,
+        fifth_token: fifth,
+        sixth_token: sixth,
+        seventh_token:  seventh,
+        eighth_token: eighth,
+    }
 }
 
 #[cfg(test)]
