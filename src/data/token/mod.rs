@@ -24,8 +24,3 @@ impl std::fmt::Display for Token {
         }
     }
 }
-
-impl SeparatedToken {
-    fn new(first: Token, Second: Token, Third: Token,) -> SeparatedToken {
-    }
-}
