@@ -76,7 +76,7 @@ mod test {
     }
 
     #[test]
-    fn test_newline_and_whitespace() {
+    fn test_twoline_programs() {
         const PROGRAM: &str = "
         !!!!!!!!
         ????????
