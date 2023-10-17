@@ -24,7 +24,16 @@ fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken
 }
 
 fn make_vector_char(str: &str) -> Vec<char> {
-    str.chars().collect()
+    let mut result: Vec<char> = Vec::new();
+    let vec_char: Vec<char> = str.chars().collect();
+    for c in vec_char.iter() {
+        match c {
+            '!' => result.push('!'),
+            '?' => result.push('?'),
+            _ => {}
+        }
+    }
+    result
 }
 
 /// separate_token function, this function partition tokens into SeparatedToken.
