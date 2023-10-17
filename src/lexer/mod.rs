@@ -24,7 +24,16 @@ fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken
 }
 
 fn make_vector_char(str: &str) -> Vec<char> {
-    str.chars().collect()
+    let mut result: Vec<char> = Vec::new();
+    let vec_char: Vec<char> = str.chars().collect();
+    for c in vec_char.iter() {
+        match c {
+            '!' => result.push('!'),
+            '?' => result.push('?'),
+            _ => {}
+        }
+    }
+    result
 }
 
 /// separate_token function, this function partition tokens into SeparatedToken.
@@ -54,6 +63,7 @@ fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
 mod test {
     use crate::data::token::SeparatedToken;
     use crate::data::token::Token;
+    use crate::lexer::make_vector_char;
     use crate::lexer::tokenize;
 
     #[test]
@@ -76,7 +86,7 @@ mod test {
     }
 
     #[test]
-    fn test_newline_and_whitespace() {
+    fn test_twoline_programs() {
         const PROGRAM: &str = "
         !!!!!!!!
         ????????
@@ -106,6 +116,19 @@ mod test {
                     eighth_token: Token::QuestionMark,
                 }
             ]
+        );
+    }
+
+    #[test]
+    fn test_ignore_newline_and_whitespace() {
+        const PROGRAM: &str = "
+        ????????
+        !!!!!!!!
+        ";
+        let vec_char: Vec<char> = make_vector_char(PROGRAM);
+        assert_eq!(
+            vec_char,
+            vec!['?', '?', '?', '?', '?', '?', '?', '?', '!', '!', '!', '!', '!', '!', '!', '!', ]
         );
     }
 }
