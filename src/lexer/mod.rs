@@ -4,6 +4,13 @@ use crate::data::token::Token;
 pub fn tokenize(program: &str) -> Vec<SeparatedToken> {
     let mut result: Vec<SeparatedToken> = Vec::new();
     let vec_char: Vec<char> = make_vector_char(program);
+
+    push_into_separate_token(vec_char, &mut result);
+
+    result
+}
+
+fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken>) {
     let mut tokens: Vec<Token> = vec![];
 
     for c in vec_char {
@@ -14,8 +21,6 @@ pub fn tokenize(program: &str) -> Vec<SeparatedToken> {
         }
         result.push(separate_token(&mut tokens));
     }
-
-    result
 }
 
 fn make_vector_char(str: &str) -> Vec<char> {
