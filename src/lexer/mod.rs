@@ -54,6 +54,7 @@ fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
 mod test {
     use crate::data::token::SeparatedToken;
     use crate::data::token::Token;
+    use crate::lexer::make_vector_char;
     use crate::lexer::tokenize;
 
     #[test]
@@ -106,6 +107,19 @@ mod test {
                     eighth_token: Token::QuestionMark,
                 }
             ]
+        );
+    }
+
+    #[test]
+    fn test_ignore_newline_and_whitespace() {
+        const PROGRAM: &str = "
+        ????????
+        !!!!!!!!
+        ";
+        let vec_char: Vec<char> = make_vector_char(PROGRAM);
+        assert_eq!(
+            vec_char,
+            vec!['?', '?', '?', '?', '?', '?', '?', '?', '!', '!', '!', '!', '!', '!', '!', '!', ]
         );
     }
 }
