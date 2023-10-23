@@ -1,6 +1,8 @@
 use crate::data::token::SeparatedToken;
 use crate::data::token::Token;
 
+/// tokenize function, convert Token &str
+/// TODO: now this function is convert SeparatedToken so fix this
 pub fn tokenize(program: &str) -> Vec<SeparatedToken> {
     let mut result: Vec<SeparatedToken> = Vec::new();
     let vec_char: Vec<char> = make_vector_char(program);
@@ -10,6 +12,7 @@ pub fn tokenize(program: &str) -> Vec<SeparatedToken> {
     result
 }
 
+/// a helper function push_into_separate_token, convert Vec<SeparatedToken> Vec<char>
 fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken>) {
     let mut tokens: Vec<Token> = vec![];
 
@@ -23,6 +26,7 @@ fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken
     }
 }
 
+/// a helper function make_vector_char, convert Vec<char>. all charactor is ignored by this function but '!' and '?' is not.
 fn make_vector_char(str: &str) -> Vec<char> {
     let mut result: Vec<char> = Vec::new();
     let vec_char: Vec<char> = str.chars().collect();
@@ -66,6 +70,7 @@ mod test {
     use crate::lexer::make_vector_char;
     use crate::lexer::tokenize;
 
+    /// test whether tokenize function is correctly convert Token one line, or not.
     #[test]
     fn test_tokenize() {
         const PROGRAM: &str = "!!!!!!!!";
@@ -85,11 +90,12 @@ mod test {
         );
     }
 
+    /// test whether tokenize function is correctly convert Token two lines, or not.
     #[test]
     fn test_twoline_programs() {
         const PROGRAM: &str = "
-        !!!!!!!!
-        ????????
+!!!!!!!!
+????????
         ";
         let tokens: Vec<SeparatedToken> = tokenize(PROGRAM);
         assert_eq!(
@@ -119,6 +125,7 @@ mod test {
         );
     }
 
+    /// test whether newline and whitespace is ignored by make_vector_char function, or not.
     #[test]
     fn test_ignore_newline_and_whitespace() {
         const PROGRAM: &str = "
