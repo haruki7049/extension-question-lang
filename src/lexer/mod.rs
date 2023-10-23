@@ -65,7 +65,6 @@ fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
 
 #[cfg(test)]
 mod test {
-    use crate::data::token::SeparatedToken;
     use crate::data::token::Token;
     use crate::lexer::make_vector_char;
     use crate::lexer::tokenize;
@@ -74,19 +73,19 @@ mod test {
     #[test]
     fn test_tokenize() {
         const PROGRAM: &str = "!!!!!!!!";
-        let tokens: Vec<SeparatedToken> = tokenize(PROGRAM);
+        let tokens: Vec<Token> = tokenize(PROGRAM);
         assert_eq!(
             tokens,
-            vec![SeparatedToken {
-                first_token: Token::ExtensionMark,
-                second_token: Token::ExtensionMark,
-                third_token: Token::ExtensionMark,
-                fourth_token: Token::ExtensionMark,
-                fifth_token: Token::ExtensionMark,
-                sixth_token: Token::ExtensionMark,
-                seventh_token: Token::ExtensionMark,
-                eighth_token: Token::ExtensionMark,
-            }]
+            vec![
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+            ]
         );
     }
 
@@ -97,30 +96,26 @@ mod test {
 !!!!!!!!
 ????????
         ";
-        let tokens: Vec<SeparatedToken> = tokenize(PROGRAM);
+        let tokens: Vec<Token> = tokenize(PROGRAM);
         assert_eq!(
             tokens,
             vec![
-                SeparatedToken {
-                    first_token: Token::ExtensionMark,
-                    second_token: Token::ExtensionMark,
-                    third_token: Token::ExtensionMark,
-                    fourth_token: Token::ExtensionMark,
-                    fifth_token: Token::ExtensionMark,
-                    sixth_token: Token::ExtensionMark,
-                    seventh_token: Token::ExtensionMark,
-                    eighth_token: Token::ExtensionMark,
-                },
-                SeparatedToken {
-                    first_token: Token::QuestionMark,
-                    second_token: Token::QuestionMark,
-                    third_token: Token::QuestionMark,
-                    fourth_token: Token::QuestionMark,
-                    fifth_token: Token::QuestionMark,
-                    sixth_token: Token::QuestionMark,
-                    seventh_token: Token::QuestionMark,
-                    eighth_token: Token::QuestionMark,
-                }
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
             ]
         );
     }
