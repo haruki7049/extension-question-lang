@@ -3,17 +3,15 @@ use crate::data::token::Token;
 
 /// tokenize function, convert Token &str
 /// TODO: now this function is convert SeparatedToken so fix this
-pub fn tokenize(program: &str) -> Vec<SeparatedToken> {
-    let mut result: Vec<SeparatedToken> = Vec::new();
+pub fn tokenize(program: &str) -> Vec<Token> {
     let vec_char: Vec<char> = make_vector_char(program);
-
-    push_into_separate_token(vec_char, &mut result);
+    let result = push_into_separate_token(vec_char);
 
     result
 }
 
-/// a helper function push_into_separate_token, convert Vec<SeparatedToken> Vec<char>
-fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken>) {
+/// a helper function push_into_separate_token, convert Vec<Token> Vec<char>
+fn push_into_separate_token(vec_char: Vec<char>) -> Vec<Token> {
     let mut tokens: Vec<Token> = vec![];
 
     for c in vec_char {
@@ -22,8 +20,9 @@ fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken
             '?' => tokens.push(Token::QuestionMark),
             _ => {}
         }
-        result.push(separate_token(&mut tokens));
     }
+
+    tokens
 }
 
 /// a helper function make_vector_char, convert Vec<char>. all charactor is ignored by this function but '!' and '?' is not.
