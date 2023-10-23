@@ -58,7 +58,7 @@ fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
         fourth_token: fourth,
         fifth_token: fifth,
         sixth_token: sixth,
-        seventh_token:  seventh,
+        seventh_token: seventh,
         eighth_token: eighth,
     }
 }
@@ -135,7 +135,7 @@ mod test {
         let vec_char: Vec<char> = make_vector_char(PROGRAM);
         assert_eq!(
             vec_char,
-            vec!['?', '?', '?', '?', '?', '?', '?', '?', '!', '!', '!', '!', '!', '!', '!', '!', ]
+            vec!['?', '?', '?', '?', '?', '?', '?', '?', '!', '!', '!', '!', '!', '!', '!', '!',]
         );
     }
 }
