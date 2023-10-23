@@ -1,16 +1,17 @@
 use crate::data::token::SeparatedToken;
 use crate::data::token::Token;
 
-pub fn tokenize(program: &str) -> Vec<SeparatedToken> {
-    let mut result: Vec<SeparatedToken> = Vec::new();
+/// tokenize function, convert Token &str
+/// TODO: now this function is convert SeparatedToken so fix this
+pub fn tokenize(program: &str) -> Vec<Token> {
     let vec_char: Vec<char> = make_vector_char(program);
-
-    push_into_separate_token(vec_char, &mut result);
+    let result = push_into_separate_token(vec_char);
 
     result
 }
 
-fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken>) {
+/// a helper function push_into_separate_token, convert Vec<Token> Vec<char>
+fn push_into_separate_token(vec_char: Vec<char>) -> Vec<Token> {
     let mut tokens: Vec<Token> = vec![];
 
     for c in vec_char {
@@ -19,10 +20,12 @@ fn push_into_separate_token(vec_char: Vec<char>, result: &mut Vec<SeparatedToken
             '?' => tokens.push(Token::QuestionMark),
             _ => {}
         }
-        result.push(separate_token(&mut tokens));
     }
+
+    tokens
 }
 
+/// a helper function make_vector_char, convert Vec<char>. all charactor is ignored by this function but '!' and '?' is not.
 fn make_vector_char(str: &str) -> Vec<char> {
     let mut result: Vec<char> = Vec::new();
     let vec_char: Vec<char> = str.chars().collect();
@@ -54,71 +57,69 @@ fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
         fourth_token: fourth,
         fifth_token: fifth,
         sixth_token: sixth,
-        seventh_token:  seventh,
+        seventh_token: seventh,
         eighth_token: eighth,
     }
 }
 
 #[cfg(test)]
 mod test {
-    use crate::data::token::SeparatedToken;
     use crate::data::token::Token;
     use crate::lexer::make_vector_char;
     use crate::lexer::tokenize;
 
+    /// test whether tokenize function is correctly convert Token one line, or not.
     #[test]
     fn test_tokenize() {
         const PROGRAM: &str = "!!!!!!!!";
-        let tokens: Vec<SeparatedToken> = tokenize(PROGRAM);
-        assert_eq!(
-            tokens,
-            vec![SeparatedToken {
-                first_token: Token::ExtensionMark,
-                second_token: Token::ExtensionMark,
-                third_token: Token::ExtensionMark,
-                fourth_token: Token::ExtensionMark,
-                fifth_token: Token::ExtensionMark,
-                sixth_token: Token::ExtensionMark,
-                seventh_token: Token::ExtensionMark,
-                eighth_token: Token::ExtensionMark,
-            }]
-        );
-    }
-
-    #[test]
-    fn test_twoline_programs() {
-        const PROGRAM: &str = "
-        !!!!!!!!
-        ????????
-        ";
-        let tokens: Vec<SeparatedToken> = tokenize(PROGRAM);
+        let tokens: Vec<Token> = tokenize(PROGRAM);
         assert_eq!(
             tokens,
             vec![
-                SeparatedToken {
-                    first_token: Token::ExtensionMark,
-                    second_token: Token::ExtensionMark,
-                    third_token: Token::ExtensionMark,
-                    fourth_token: Token::ExtensionMark,
-                    fifth_token: Token::ExtensionMark,
-                    sixth_token: Token::ExtensionMark,
-                    seventh_token: Token::ExtensionMark,
-                    eighth_token: Token::ExtensionMark,
-                },
-                SeparatedToken {
-                    first_token: Token::QuestionMark,
-                    second_token: Token::QuestionMark,
-                    third_token: Token::QuestionMark,
-                    fourth_token: Token::QuestionMark,
-                    fifth_token: Token::QuestionMark,
-                    sixth_token: Token::QuestionMark,
-                    seventh_token: Token::QuestionMark,
-                    eighth_token: Token::QuestionMark,
-                }
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
             ]
         );
     }
 
+    /// test whether tokenize function is correctly convert Token two lines, or not.
+    #[test]
+    fn test_twoline_programs() {
+        const PROGRAM: &str = "
+!!!!!!!!
+????????
+        ";
+        let tokens: Vec<Token> = tokenize(PROGRAM);
+        assert_eq!(
+            tokens,
+            vec![
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::ExtensionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+                Token::QuestionMark,
+            ]
+        );
+    }
+
+    /// test whether newline and whitespace is ignored by make_vector_char function, or not.
     #[test]
     fn test_ignore_newline_and_whitespace() {
         const PROGRAM: &str = "
@@ -128,7 +129,7 @@ mod test {
         let vec_char: Vec<char> = make_vector_char(PROGRAM);
         assert_eq!(
             vec_char,
-            vec!['?', '?', '?', '?', '?', '?', '?', '?', '!', '!', '!', '!', '!', '!', '!', '!', ]
+            vec!['?', '?', '?', '?', '?', '?', '?', '?', '!', '!', '!', '!', '!', '!', '!', '!',]
         );
     }
 }
