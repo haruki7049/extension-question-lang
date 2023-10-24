@@ -2,7 +2,6 @@ use crate::data::token::SeparatedToken;
 use crate::data::token::Token;
 
 /// tokenize function, convert Token &str
-/// TODO: now this function is convert SeparatedToken so fix this
 pub fn tokenize(program: &str) -> Vec<Token> {
     let vec_char: Vec<char> = make_vector_char(program);
     let result = push_into_separate_token(vec_char);
