@@ -1,5 +1,2 @@
-//pub enum Object {
-//    While(),
-//    If(),
-//    Define(),
-//}
+pub enum Object {
+}
