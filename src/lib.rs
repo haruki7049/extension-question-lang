@@ -1,5 +1,5 @@
 /// contains some data which is Token, SeparatedToken and Object.
-mod data;
+pub mod data;
 
 /// this module convert &str to Token
 /// &str -> Token
