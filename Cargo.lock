@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "extension-question-lang"
+name = "eqlang"
 version = "0.1.0"

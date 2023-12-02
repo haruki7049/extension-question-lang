@@ -1,12 +1,9 @@
-use crate::data::token::SeparatedToken;
 use crate::data::token::Token;
 
 /// tokenize function, convert Token &str
 pub fn tokenize(program: &str) -> Vec<Token> {
     let vec_char: Vec<char> = make_vector_char(program);
-    let result = push_into_separate_token(vec_char);
-
-    result
+    push_into_separate_token(vec_char)
 }
 
 /// a helper function push_into_separate_token, convert Vec<Token> Vec<char>
@@ -39,27 +36,27 @@ fn make_vector_char(str: &str) -> Vec<char> {
 }
 
 /// separate_token function, this function partition tokens into SeparatedToken.
-fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
-    let first: Token = tokens.pop().unwrap();
-    let second: Token = tokens.pop().unwrap();
-    let third: Token = tokens.pop().unwrap();
-    let fourth: Token = tokens.pop().unwrap();
-    let fifth: Token = tokens.pop().unwrap();
-    let sixth: Token = tokens.pop().unwrap();
-    let seventh: Token = tokens.pop().unwrap();
-    let eighth: Token = tokens.pop().unwrap();
-
-    SeparatedToken {
-        first_token: first,
-        second_token: second,
-        third_token: third,
-        fourth_token: fourth,
-        fifth_token: fifth,
-        sixth_token: sixth,
-        seventh_token: seventh,
-        eighth_token: eighth,
-    }
-}
+// fn separate_token(tokens: &mut Vec<Token>) -> SeparatedToken {
+// let first: Token = tokens.pop().unwrap();
+// let second: Token = tokens.pop().unwrap();
+// let third: Token = tokens.pop().unwrap();
+// let fourth: Token = tokens.pop().unwrap();
+// let fifth: Token = tokens.pop().unwrap();
+// let sixth: Token = tokens.pop().unwrap();
+// let seventh: Token = tokens.pop().unwrap();
+// let eighth: Token = tokens.pop().unwrap();
+//
+// SeparatedToken {
+//     first_token: first,
+//     second_token: second,
+//     third_token: third,
+//     fourth_token: fourth,
+//     fifth_token: fifth,
+//     sixth_token: sixth,
+//     seventh_token: seventh,
+//     eighth_token: eighth,
+// }
+// }
 
 #[cfg(test)]
 mod test {
